@@ -5,6 +5,7 @@
   "description": "Awesome project developed with TypeORM.",
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
+    "@types/graphql": "0.13.0",
     "@types/jest": "^24.0.24",
     "@types/node": "^13.1.1",
     "@types/uuid": "^3.4.6",
@@ -20,8 +21,10 @@
   "dependencies": {
     "aws-lambda": "^0.1.2",
     "bcryptjs": "^2.4.3",
+    "graphql": "0.13.0",
     "graphql-import": "^0.7.1",
     "graphql-request": "^1.8.2",
+    "graphql-tools": "^4.0.6",
     "graphql-yoga": "^1.18.3",
     "pg": "^7.15.1",
     "reflect-metadata": "^0.1.13",

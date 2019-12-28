@@ -366,6 +366,10 @@
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@types/graphql-deduplicator/-/graphql-deduplicator-2.0.0.tgz#9e577b8f3feb3d067b0ca756f4a1fb356d533922"
 
+"@types/graphql@0.13.0":
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/@types/graphql/-/graphql-0.13.0.tgz#78a33a7f429a06a64714817d9130d578e0f35ecb"
+
 "@types/graphql@^14.0.0":
   version "14.5.0"
   resolved "https://registry.yarnpkg.com/@types/graphql/-/graphql-14.5.0.tgz#a545fb3bc8013a3547cf2f07f5e13a33642b75d6"
@@ -1823,7 +1827,7 @@ graphql-subscriptions@^0.5.8:
   dependencies:
     iterall "^1.2.1"
 
-graphql-tools@^4.0.0, graphql-tools@^4.0.5:
+graphql-tools@^4.0.0, graphql-tools@^4.0.5, graphql-tools@^4.0.6:
   version "4.0.6"
   resolved "https://registry.yarnpkg.com/graphql-tools/-/graphql-tools-4.0.6.tgz#0e729e73db05ade3df10a2f92511be544972a844"
   dependencies:
