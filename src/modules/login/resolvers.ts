@@ -15,7 +15,11 @@ export const resolvers: ResolverMap = {
     dummy2: () => `Graphql-tools doesnt like it when you dont have a Query`
   },
   Mutation: {
-    login: async (_, { email, password }: GQL.ILoginOnMutationArguments) => {
+    login: async (
+      _,
+      { email, password }: GQL.ILoginOnMutationArguments,
+      { session }
+    ) => {
       const user = await User.findOne({ where: { email } });
       if (!user) {
         return errorResponse;
@@ -34,6 +38,12 @@ export const resolvers: ResolverMap = {
       if (!valid) {
         return errorResponse;
       }
+
+      // create cookie for successful user
+      // express session looks for changes in session object
+      // then creats cookie and stores the data
+      session.userId = user.id;
+
       return null;
     }
   }
