@@ -4,6 +4,7 @@ import { User } from "../../entity/User";
 import { ResolverMap } from "../../types/graphql-utils";
 import { createConfirmEmailLink } from "../../utils/createConfirmEmailLink";
 import { formatYupError } from "../../utils/formatYupError";
+import { sendEmail } from "../../utils/sendEmail";
 import {
   duplicateEmail,
   emailNotLongEnough,
@@ -58,7 +59,9 @@ export const resolvers: ResolverMap = {
       });
 
       await user.save();
-      await createConfirmEmailLink(url, user.id, redis);
+      if (process.env.NODE_ENV !== "test") {
+        sendEmail(email, await createConfirmEmailLink(url, user.id, redis));
+      }
       return null;
     }
   }

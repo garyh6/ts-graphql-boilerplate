@@ -9,6 +9,7 @@
     "database": "ts-server",
     "synchronize": true,
     "logging": true,
+    "dropSchema": false,
     "uuidExtension": "pgcrypto",
     "entities": ["src/entity/**/*.ts"],
     "migrations": ["src/migration/**/*.ts"],

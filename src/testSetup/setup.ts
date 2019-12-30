@@ -1,6 +1,6 @@
+import "dotenv/config";
 import { startServer } from "../startServer";
 import { AddressInfo } from "../types/graphql-utils";
-
 export const setup = async () => {
   const app = await startServer();
   const { port } = app.address() as AddressInfo;
