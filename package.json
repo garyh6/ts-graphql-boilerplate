@@ -29,6 +29,7 @@
   "dependencies": {
     "@gql2ts/from-schema": "^1.10.1",
     "aws-lambda": "^0.1.2",
+    "axios": "^0.19.0",
     "bcryptjs": "^2.4.3",
     "connect-redis": "^4.0.3",
     "dotenv": "^8.2.0",
@@ -54,7 +55,7 @@
   "scripts": {
     "start": "NODE_ENV=development TS_NODE_FILES=true nodemon --exec ts-node --files src/index.ts",
     "test-server": "NODE_ENV=test TS_NODE_FILES=true ts-node src/index.ts",
-    "test": "NODE_ENV=test TS_NODE_FILES=true jest --detectOpenHandles --watch",
+    "test": "NODE_ENV=test TS_NODE_FILES=true jest --detectOpenHandles --watch --runInBand",
     "gen-schema-types": "ts-node --files -r dotenv/config src/scripts/createTypes.ts",
     "ci": "start-server-and-test test-server http://localhost:4000 test"
   },

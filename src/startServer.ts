@@ -1,6 +1,8 @@
 import * as connectRedis from "connect-redis";
+import "dotenv/config";
 import * as session from "express-session";
 import { GraphQLServer } from "graphql-yoga";
+import "reflect-metadata";
 import { redis } from "./redis";
 import { confirmEmail } from "./routes/confirmEmail";
 import { createTypeormConn } from "./utils/createTypeormConn";
@@ -34,7 +36,10 @@ export const startServer = async () => {
 
   const cors = {
     credentials: true,
-    origin: process.env.FRONTEND_HOST
+    origin:
+      process.env.NODE_ENV === "test"
+        ? "*"
+        : (process.env.FRONTEND_HOST as string)
   };
 
   server.express.get("/confirm/:id", confirmEmail);

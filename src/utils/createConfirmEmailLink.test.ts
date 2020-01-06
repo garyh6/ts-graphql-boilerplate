@@ -6,8 +6,8 @@ import { createConfirmEmailLink } from "./createConfirmEmailLink";
 import { createTypeormConn } from "./createTypeormConn";
 
 let userId = "";
-let conn: Connection;
 const redis = new Redis();
+let conn: Connection;
 
 beforeAll(async () => {
   conn = await createTypeormConn();

@@ -1,4 +1,3 @@
-import "dotenv/config";
 import { startServer } from "../startServer";
 import { AddressInfo } from "../types/graphql-utils";
 export const setup = async () => {
