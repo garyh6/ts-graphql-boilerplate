@@ -10,7 +10,7 @@ export class TestClient {
   };
 
   constructor(url: string) {
-    this.url = url;
+    this.url = process.env.TEST_HOST + url;
     this.options = {
       jar: rp.jar(),
       withCredentials: true,

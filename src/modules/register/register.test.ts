@@ -19,7 +19,7 @@ afterAll(async () => {
 describe("Register user", () => {
   test("check for duplicate emails", async () => {
     // Register a user
-    const client = new TestClient(process.env.TEST_HOST as string);
+    const client = new TestClient("");
 
     const response = await client.register(email, password);
     expect(response.data).toEqual({ register: null });
@@ -40,7 +40,7 @@ describe("Register user", () => {
   });
 
   test("check bad email", async () => {
-    const client = new TestClient(process.env.TEST_HOST as string);
+    const client = new TestClient("");
     const response3 = await client.register("xx", password);
     expect(response3.data).toEqual({
       register: [
@@ -57,7 +57,7 @@ describe("Register user", () => {
   });
 
   test("check bad password", async () => {
-    const client = new TestClient(process.env.TEST_HOST as string);
+    const client = new TestClient("");
     const response4 = await client.register(email, "xx");
     expect(response4.data).toEqual({
       register: [
@@ -70,7 +70,7 @@ describe("Register user", () => {
   });
 
   test("check bad email and bad password", async () => {
-    const client = new TestClient(process.env.TEST_HOST as string);
+    const client = new TestClient("");
     const response5 = await client.register("xx", "xx");
     expect(response5.data).toEqual({
       register: [

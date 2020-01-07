@@ -23,13 +23,13 @@ afterAll(async () => {
 
 describe("me", () => {
   test("return null if no cookie", async () => {
-    const client = new TestClient(process.env.TEST_HOST as string);
+    const client = new TestClient("");
     const res = await client.me();
     expect(res.data.me).toEqual(null);
   });
 
   test("get current user", async () => {
-    const client = new TestClient(process.env.TEST_HOST as string);
+    const client = new TestClient("");
     await client.login(email, password);
 
     const response = await client.me();

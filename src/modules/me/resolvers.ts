@@ -8,7 +8,6 @@ export const resolvers: ResolverMap = {
     me: createMiddleware(middleware, (_, __, { session }) => {
       // console.log("************** session", session);
       // console.log("************** session", session.userId);
-
       User.findOne({ where: { id: session.userId } });
     })
   }
