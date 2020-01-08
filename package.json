@@ -55,7 +55,7 @@
   "scripts": {
     "start": "NODE_ENV=development TS_NODE_FILES=true nodemon --exec ts-node --files src/index.ts",
     "test-server": "NODE_ENV=test TS_NODE_FILES=true ts-node src/index.ts",
-    "test": "NODE_ENV=test TS_NODE_FILES=true jest --detectOpenHandles --watch --runInBand",
+    "test": "NODE_ENV=test TS_NODE_FILES=true jest --runInBand --detectOpenHandles --watch",
     "gen-schema-types": "ts-node --files -r dotenv/config src/scripts/createTypes.ts",
     "ci": "start-server-and-test test-server http://localhost:4000 test"
   },

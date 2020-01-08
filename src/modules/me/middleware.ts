@@ -2,9 +2,12 @@ import { Resolver } from "../../types/graphql-utils";
 // import { User } from "../../entity/User";
 
 export default async (resolver: Resolver, parent: any, args: any, context: any, info: any) => {
-  if (!context.session || !context.session.userId) {
-    return null;
-  }
+  // console.log("************ context", context.userId);
+
+  // if (!context.session || !context.session.userId) {
+  //   return null;
+  // }
+
   // console.log("args given: ", args);
   // console.log("************ resolver", resolver);
 
@@ -16,11 +19,11 @@ export default async (resolver: Resolver, parent: any, args: any, context: any, 
 
   // middleware
 
-  const result = await resolver(parent, args, context, info);
-  // console.log("************ context", context);
+  // const result = await resolver(parent, args, context, info);
   // console.log("************ result: ", result);
 
   // afterware
 
-  return result;
+  // return result;
+  return resolver(parent, args, context, info);
 };
