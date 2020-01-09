@@ -60,6 +60,18 @@ export class TestClient {
     });
   }
 
+  async logoutAll() {
+    return rp.post(this.url, {
+      ...this.options,
+      body: {
+        query: `
+          mutation {
+            logoutAll
+          }`
+      }
+    });
+  }
+
   async register(email: string, password: string) {
     return rp.post(this.url, {
       ...this.options,

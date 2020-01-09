@@ -3,9 +3,24 @@ import { Redis } from "ioredis";
 export type Resolver = (
   parent: any,
   args: any,
-  context: { redis: Redis; url: string; session: Session },
+  context: Context,
   info: any
 ) => any;
+
+export type GraphQLMiddlewareFunc = (
+  resolver: Resolver,
+  parent: any,
+  args: any,
+  context: Context,
+  info: any
+) => any;
+
+export interface Context {
+  redis: Redis;
+  url: string;
+  session: Session;
+  req: Express.Request;
+}
 
 export interface ResolverMap {
   [key: string]: {
@@ -16,17 +31,10 @@ export interface ResolverMap {
 export interface AddressInfo {
   address: string;
   family: string;
+
   port: number;
 }
 
 export interface Session extends Express.Session {
   userId?: string;
 }
-
-export type GraphQLMiddlewareFunc = (
-  resolver: Resolver,
-  parent: any,
-  args: any,
-  context: { redis: Redis; url: string; session: Session },
-  info: any
-) => any;
