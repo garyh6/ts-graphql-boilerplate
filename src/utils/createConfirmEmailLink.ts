@@ -7,6 +7,7 @@ export const createConfirmEmailLink = async (
   redis: Redis
 ) => {
   const id = v4();
+  // Link active for 24 hrs
   await redis.set(id, userId, "ex", 60 * 60 * 24);
   return `${url}/confirm/${id}`;
 };

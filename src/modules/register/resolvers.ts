@@ -5,21 +5,14 @@ import { createConfirmEmailLink } from "../../utils/createConfirmEmailLink";
 import { formatYupError } from "../../utils/formatYupError";
 import { sendEmail } from "../../utils/sendEmail";
 import {
-  duplicateEmail,
-  emailNotLongEnough,
-  invalidEmail,
-  passwordNotLongEnough
-} from "./errorMessage";
+  registerEmailValidation,
+  registerPasswordValidation
+} from "../../yupSchema";
+import { duplicateEmail } from "./errorMessage";
+
 const schema = yup.object().shape({
-  email: yup
-    .string()
-    .min(3, emailNotLongEnough)
-    .max(255)
-    .email(invalidEmail),
-  password: yup
-    .string()
-    .min(3, passwordNotLongEnough)
-    .max(255)
+  email: registerEmailValidation,
+  password: registerPasswordValidation
 });
 
 export const resolvers: ResolverMap = {
@@ -37,7 +30,6 @@ export const resolvers: ResolverMap = {
       } catch (err) {
         return formatYupError(err);
       }
-
       const { email, password } = args;
       const userAlreadyExists = await User.findOne({
         where: { email },

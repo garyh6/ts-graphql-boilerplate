@@ -18,6 +18,21 @@ export class TestClient {
     };
   }
 
+  async forgotPasswordChange(newPassword: string, key: string) {
+    return rp.post(this.url, {
+      ...this.options,
+      body: {
+        query: `
+        mutation {
+          forgotPasswordChange(newPassword: "${newPassword}", key: "${key}" ) {
+            path
+            message
+          }
+        }`
+      }
+    });
+  }
+
   async me() {
     return rp.post(this.url, {
       ...this.options,
