@@ -1,22 +1,29 @@
+import * as faker from "faker";
 import { Connection } from "typeorm";
 import { User } from "../../entity/User";
-import { createTypeormConn } from "../../utils/createTypeormConn";
+import { createTestConn } from "../../testSetup/createTestConn";
 import { TestClient } from "../../utils/TestClient";
 import { confirmEmailError, invalidLogin } from "./errorMessage";
 
-const email = "gary1@test.com";
-const password = "test";
+faker.seed(faker.random.number());
+const email = faker.internet.email();
+const password = faker.internet.password();
 
 let conn: Connection;
 beforeAll(async () => {
-  conn = await createTypeormConn();
+  conn = await createTestConn();
 });
 
 afterAll(async () => {
   conn.close();
 });
 
-const loginExpectError = async (client: TestClient, e: string, p: string, errMsg: string) => {
+const loginExpectError = async (
+  client: TestClient,
+  e: string,
+  p: string,
+  errMsg: string
+) => {
   const response = await client.login(e, p);
 
   expect(response.data).toEqual({
@@ -33,7 +40,12 @@ describe("Login", () => {
   test("email not found", async () => {
     // Login with unregistered email
     const client = new TestClient("");
-    await loginExpectError(client, "notInDB@test.com", "failLogin", invalidLogin);
+    await loginExpectError(
+      client,
+      "notInDB@test.com",
+      "failLogin",
+      invalidLogin
+    );
   });
 
   test("email not confirmed", async () => {

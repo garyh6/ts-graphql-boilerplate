@@ -1,21 +1,26 @@
+import * as faker from "faker";
 import * as Redis from "ioredis";
 import { Connection } from "typeorm";
 import { User } from "../../entity/User";
+import { createTestConn } from "../../testSetup/createTestConn";
 import { createForgotPasswordLink } from "../../utils/createForgotPasswordLink";
-import { createTypeormConn } from "../../utils/createTypeormConn";
 import { forgotPasswordLockAccount } from "../../utils/forgotPasswordLockAccount";
 import { TestClient } from "../../utils/TestClient";
 import { forgotPasswordLockedError } from "../login/errorMessage";
 import { passwordNotLongEnough } from "../register/errorMessage";
 import { expiredKeyError } from "./errorMessage";
+
 let conn: Connection;
 const redis = new Redis();
-const email = "gary@gary.com";
-const password = "dfadsfas";
-const newPassword = "zxcvzxcvz";
+faker.seed(faker.random.number());
+const email = faker.internet.email();
+const password = faker.internet.password();
+faker.seed(faker.random.number());
+
+const newPassword = faker.internet.password();
 let userId: string;
 beforeAll(async () => {
-  conn = await createTypeormConn();
+  conn = await createTestConn();
   const user = await User.create({
     email,
     password,

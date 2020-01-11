@@ -8,12 +8,20 @@ import "reflect-metadata";
 import { redisSessionPrefix } from "./constants";
 import { redis } from "./redis";
 import { confirmEmail } from "./routes/confirmEmail";
+import { createTestConn } from "./testSetup/createTestConn";
 import { createTypeormConn } from "./utils/createTypeormConn";
 import { genSchema } from "./utils/generateSchema";
 
 const SESSION_SECRET = "asdfasdf";
 const RedisStore = connectRedis(session);
 export const startServer = async () => {
+  if (process.env.NODE_ENV === "test") {
+    await redis.flushall();
+    await createTestConn(true);
+  } else {
+    await createTypeormConn();
+  }
+
   const server = new GraphQLServer({
     schema: genSchema(),
     context: ({ request }) => ({
@@ -31,7 +39,9 @@ export const startServer = async () => {
     windowMs: 15 * 60 * 1000, // 15 minutes
     max: 100 // limit each IP to 100 requests per windowMs
   });
-  server.express.use(limiter);
+  if (process.env.NODE_ENV === "test") {
+    server.express.use(limiter);
+  }
 
   // express-rate-limit
   // TODO limit on /create-account (maybe 5 per hours?)
@@ -64,7 +74,6 @@ export const startServer = async () => {
 
   server.express.get("/confirm/:id", confirmEmail);
 
-  await createTypeormConn();
   const app = await server.start({
     cors,
     port: process.env.NODE_ENV === "test" ? 0 : 4000
