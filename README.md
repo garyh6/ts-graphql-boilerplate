@@ -3,11 +3,12 @@ typescript graphql postgres typeorm redis node server
 
 jest
 
-gen schema
-register
-login
-email confirmation
-logout session
-lock account
-forgot password
-rate limiting
+# boilerplate includes
+- gen schema
+- register / simple validation
+- login
+- email confirmation
+- logout sessions
+- lock account
+- forgot password
+- rate limiting
