@@ -12,3 +12,10 @@ jest
 - lock account
 - forgot password
 - rate limiting
+
+# TODO
+JWT - refresh token + access token
+whitelist - redis
+
+x-csrf-token
+flags - httponly, secure, samesite
